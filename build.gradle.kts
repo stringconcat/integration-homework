@@ -15,6 +15,7 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:2.6.7")
+    implementation("jakarta.validation:jakarta.validation-api:3.0.1")
     implementation("org.slf4j:slf4j-api:1.7.36")
 
     testImplementation("org.testng:testng:7.5")

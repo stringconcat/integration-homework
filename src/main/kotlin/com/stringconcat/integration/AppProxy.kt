@@ -10,15 +10,15 @@ import java.net.InetSocketAddress
 import java.net.Proxy
 
 @Configuration
-class AppProxy(@Value("\${proxy-server-host}") val host: String,
-               @Value("\${proxy-server-port}") val port: String) {
+class AppProxy(@Value("\${gateway-server-host}") val host: String,
+               @Value("\${gateway-server-port}") val port: String) {
 
     @Bean
     fun restTemplate(): RestTemplate {
-        LOGGER.info("Setting up proxy with HOSTNAME => $host and PORT => $port")
+        LOGGER.info("Setting up gateway with HOSTNAME => $host and PORT => $port")
         val requestFactory = SimpleClientHttpRequestFactory()
-        val proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress(host, port.toInt()))
-        requestFactory.setProxy(proxy)
+        val gateway = Proxy(Proxy.Type.HTTP, InetSocketAddress(host, port.toInt()))
+        requestFactory.setProxy(gateway)
         return RestTemplate(requestFactory)
     }
 
