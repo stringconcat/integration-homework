@@ -8,10 +8,12 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory
 import org.springframework.web.client.RestTemplate
 import java.net.InetSocketAddress
 import java.net.Proxy
+import org.springframework.retry.annotation.EnableRetry
 
 @Configuration
-class AppProxy(@Value("\${gateway-server-host}") val host: String,
-               @Value("\${gateway-server-port}") val port: String) {
+@EnableRetry
+class GatewayApplication(@Value("\${remote.server.host}") val host: String,
+                         @Value("\${remote.server.port}") val port: String) {
 
     @Bean
     fun restTemplate(): RestTemplate {
@@ -23,6 +25,6 @@ class AppProxy(@Value("\${gateway-server-host}") val host: String,
     }
 
     companion object {
-        private val LOGGER = LoggerFactory.getLogger(AppProxy::class.java)
+        private val LOGGER = LoggerFactory.getLogger(GatewayApplication::class.java)
     }
 }
