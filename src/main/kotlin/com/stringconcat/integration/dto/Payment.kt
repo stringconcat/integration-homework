@@ -5,7 +5,7 @@ import java.time.OffsetDateTime
 
 data class Payment(
     val number: String,
-    val date: OffsetDateTime,
+    val expirationDate: OffsetDateTime,
     val owner: String,
     val cvv: Int,
     val amount: BigDecimal
