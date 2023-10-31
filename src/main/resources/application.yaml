@@ -1,0 +1,8 @@
+gateway:
+  server:
+    host: some-remote-server
+    port: 8090
+    store-endpoint: /store
+retry:
+  maxAttempts: 2
+  maxDelay: 100
