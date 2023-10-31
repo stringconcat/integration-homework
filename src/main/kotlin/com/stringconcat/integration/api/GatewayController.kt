@@ -17,7 +17,6 @@ import java.io.IOException
 class GatewayController(val gatewayService: GatewayService) {
 
     @PostMapping("/new")
-    @Retryable(IOException::class)
     fun execute(@Validated @RequestBody paymentRequest: PaymentRequest): PaymentResponse {
         LOGGER.info("Payment request for ${paymentRequest.owner}")
 

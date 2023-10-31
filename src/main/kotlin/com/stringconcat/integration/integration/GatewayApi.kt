@@ -8,8 +8,10 @@ import com.stringconcat.integration.properties.GatewayProperty
 import com.stringconcat.integration.service.action.MakeStoreAction
 import com.stringconcat.integration.service.data.OperationStatus
 import org.slf4j.LoggerFactory
+import org.springframework.retry.annotation.Retryable
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate
+import java.io.IOException
 import java.math.BigDecimal
 import java.time.OffsetDateTime
 
@@ -20,6 +22,8 @@ class GatewayApi(
         var gatewayProperty: GatewayProperty,
         var restTemplate: RestTemplate
 ) : MakeStoreAction {
+
+    @Retryable(IOException::class)
     override fun store(number: String, expirationDate: OffsetDateTime, owner: String, cvv: Int, amount: BigDecimal): OperationStatus {
         val paymentData = paymentDataProvider.provide(number, expirationDate, cvv, amount)
         val payload = paymentRequestBuilder.provide(paymentData);
